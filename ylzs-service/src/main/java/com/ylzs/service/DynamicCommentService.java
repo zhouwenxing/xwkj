@@ -27,6 +27,7 @@ public class DynamicCommentService {
 		dynamicComment.setCommentStatus(1);
 		dynamicComment.setCreateTime(DateTimeUtil.getNowTimestamp());
 		dynamicCommentMapper.insert(dynamicComment);
+		
 	}
 
 	

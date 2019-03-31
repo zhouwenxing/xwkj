@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import springfox.documentation.annotations.ApiIgnore;
 
+import com.ylzs.core.constant.DynamicEnum;
 import com.ylzs.core.dto.CreateTravelDTO;
 import com.ylzs.core.dto.ReleaseTravelDTO;
+import com.ylzs.core.dto.ReleaseTravelDTO.Travel;
 import com.ylzs.core.dto.UpdateTravelDTO;
 import com.ylzs.core.model.UserMounClim;
 import com.ylzs.core.model.base.CommonResponse;
@@ -80,19 +83,26 @@ public class MoutainClimbController {
 	 * @param releaseTravelDTO
 	 */
 	@PostMapping(value="/travel/release")
-	@ApiOperation(value="发布行程(可联调3.24)")
+	@ApiOperation(value="发布行程+发布动态(可联调3.24)(有变动3.31)")
 	public CommonResponse<String> releaseTravel(@ApiIgnore @Request RequestInfo requestInfo,@ApiIgnore HttpSession session,
-			@Validated @RequestBody ReleaseTravelDTO releaseTravelDTO,@ApiIgnore BindingResult result){
+			@Validated({Travel.class}) @RequestBody ReleaseTravelDTO releaseTravelDTO,@ApiIgnore BindingResult result){
 		if (result.hasErrors()){
 			return new CommonResponse<String>("fail", result.getFieldErrors().get(0).getDefaultMessage(),null);
 		}
 		String userId = (String)session.getAttribute("userId");
-		UserMounClim userMounClim = moutainClimbService.selectByPrimaryKey(releaseTravelDTO.getMounClimId());
-		
-		if(!userMounClim.getUserId().equals(userId)){
-			return new CommonResponse<String>("fail","非法请求",null);
+		String mounClimId = releaseTravelDTO.getMounClimId();
+		UserMounClim userMounClim = null;
+		if(!StringUtils.isBlank(mounClimId)){
+			userMounClim = moutainClimbService.selectByPrimaryKey(mounClimId);
+			if(null == userMounClim){//判断行程信息是否存在
+				return new CommonResponse<String>("fail","非法请求",null);
+			}
+			if(!userMounClim.getUserId().equals(userId)){//判断是否本人的登山行程
+				return new CommonResponse<String>("fail","行程信息非法",null);
+			}
 		}
-		if(releaseTravelDTO.getViewType() == 4){
+		
+		if(releaseTravelDTO.getViewType() == DynamicEnum.VIEW_SELECT_FRIEND.getCode()){
 			List<String> friendList = releaseTravelDTO.getFriendList();
 			if(null == friendList || friendList.size() == 0){
 				return new CommonResponse<String>("fail","请选择可见关注好友",null);

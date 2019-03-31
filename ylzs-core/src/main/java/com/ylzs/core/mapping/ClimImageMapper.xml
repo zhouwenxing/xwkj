@@ -3,7 +3,7 @@
 <mapper namespace="com.ylzs.core.mapper.ClimImageMapper" >
   <resultMap id="BaseResultMap" type="com.ylzs.core.model.ClimImage" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="moun_clim_id" property="mounClimId" jdbcType="VARCHAR" />
+    <result column="dynamic_id" property="dynamicId" jdbcType="VARCHAR" />
     <result column="image_id" property="imageId" jdbcType="VARCHAR" />
     <result column="image_type" property="imageType" jdbcType="TINYINT" />
     <result column="image_sort" property="imageSort" jdbcType="INTEGER" />
@@ -15,7 +15,7 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, moun_clim_id, image_id, image_type, image_sort, ip, source, imei, create_time, 
+    id, dynamic_id, image_id, image_type, image_sort, ip, source, imei, create_time, 
     update_time, remark
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -29,11 +29,11 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ylzs.core.model.ClimImage" >
-    insert into ylzs_clim_image (id, moun_clim_id, image_id, 
+    insert into ylzs_clim_image (id, dynamic_id, image_id, 
       image_type, image_sort, ip, 
       source, imei, create_time, 
       update_time, remark)
-    values (#{id,jdbcType=VARCHAR}, #{mounClimId,jdbcType=VARCHAR}, #{imageId,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{dynamicId,jdbcType=VARCHAR}, #{imageId,jdbcType=VARCHAR}, 
       #{imageType,jdbcType=TINYINT}, #{imageSort,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, 
       #{source,jdbcType=TINYINT}, #{imei,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
@@ -44,8 +44,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="mounClimId != null" >
-        moun_clim_id,
+      <if test="dynamicId != null" >
+        dynamic_id,
       </if>
       <if test="imageId != null" >
         image_id,
@@ -79,8 +79,8 @@
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="mounClimId != null" >
-        #{mounClimId,jdbcType=VARCHAR},
+      <if test="dynamicId != null" >
+        #{dynamicId,jdbcType=VARCHAR},
       </if>
       <if test="imageId != null" >
         #{imageId,jdbcType=VARCHAR},
@@ -114,8 +114,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ylzs.core.model.ClimImage" >
     update ylzs_clim_image
     <set >
-      <if test="mounClimId != null" >
-        moun_clim_id = #{mounClimId,jdbcType=VARCHAR},
+      <if test="dynamicId != null" >
+        dynamic_id = #{dynamicId,jdbcType=VARCHAR},
       </if>
       <if test="imageId != null" >
         image_id = #{imageId,jdbcType=VARCHAR},
@@ -149,7 +149,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ylzs.core.model.ClimImage" >
     update ylzs_clim_image
-    set moun_clim_id = #{mounClimId,jdbcType=VARCHAR},
+    set dynamic_id = #{dynamicId,jdbcType=VARCHAR},
       image_id = #{imageId,jdbcType=VARCHAR},
       image_type = #{imageType,jdbcType=TINYINT},
       image_sort = #{imageSort,jdbcType=INTEGER},

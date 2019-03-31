@@ -3,7 +3,7 @@ package com.ylzs.core.model.base;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel("分页参数")
+@ApiModel(value="BasePageRequest",description = "分页参数")
 public class BasePageRequest {
 	
 	@ApiModelProperty("当前页数，默认1")

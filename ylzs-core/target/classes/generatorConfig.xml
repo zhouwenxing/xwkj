@@ -18,7 +18,7 @@
 		</jdbcConnection>
 		<!-- 所生成的实体类的位置默认资源包src -->
 		<javaModelGenerator
-			targetPackage="com.ylzs.core.model" targetProject="src/main/java">
+			targetPackage="com.ylzs.core.model" targetProject="E:\test">
 			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.st.eleventh.user.model， true:com.st.eleventh.user.model.[schemaName] -->
 			<property name="enableSubPackages" value="false" />
 			<!-- 是否针对string类型的字段在set的时候进行trim调用 -->
@@ -27,21 +27,21 @@
 		<!--所生成的sqlMapper的映射文件位置，默认资源包src -->
 		<sqlMapGenerator
 			targetPackage="com.ylzs.core.mapping"
-			targetProject="src/main/java">
+			targetProject="E:\test">
 			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.st.eleventh.user.model， true:com.st.eleventh.user.model.[schemaName] -->
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 		<!--配置到接口生成信息 -->
 		<javaClientGenerator
 			targetPackage="com.ylzs.core.mapper" type="XMLMAPPER"
-			targetProject="src/main/java">
+			targetProject="E:\test">
 			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.st.eleventh.user.model， true:com.st.eleventh.user.model.[schemaName] -->
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		
 		<!-- 配置表信息 -->
-		<table schema="ylzs" tableName="ylzs_dynamic_comment"
-			domainObjectName="DynamicComment" enableCountByExample="false"
+		<table schema="ylzs" tableName="ylzs_user_dynamic"
+			domainObjectName="UserDynamic" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<property name="useActualColumnNames" value="false" />

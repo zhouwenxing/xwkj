@@ -6,7 +6,7 @@ import com.ylzs.core.model.base.RequestInfo;
 public class ClimImage extends RequestInfo {
 	private static final long serialVersionUID = -2798147735235388817L;
 
-    private String mounClimId;
+    private String dynamicId;
 
     private String imageId;
 
@@ -16,12 +16,12 @@ public class ClimImage extends RequestInfo {
 
     private Timestamp updateTime;
 
-	public String getMounClimId() {
-		return mounClimId;
+	public String getDynamicId() {
+		return dynamicId;
 	}
 
-	public void setMounClimId(String mounClimId) {
-		this.mounClimId = mounClimId;
+	public void setDynamicId(String dynamicId) {
+		this.dynamicId = dynamicId;
 	}
 
 	public String getImageId() {

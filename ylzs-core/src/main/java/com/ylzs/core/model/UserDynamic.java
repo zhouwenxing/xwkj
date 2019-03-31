@@ -8,6 +8,14 @@ public class UserDynamic extends RequestInfo {
 	private static final long serialVersionUID = -5596852894983379356L;
 
     private String mounClimId;
+    
+    private String mountainName;
+
+    private String userExperience;
+
+    private Integer climblingAltitude;
+    
+    private String userId;
 
     private Integer viewType;
 
@@ -27,6 +35,38 @@ public class UserDynamic extends RequestInfo {
 
 	public void setMounClimId(String mounClimId) {
 		this.mounClimId = mounClimId;
+	}
+
+	public String getMountainName() {
+		return mountainName;
+	}
+
+	public void setMountainName(String mountainName) {
+		this.mountainName = mountainName;
+	}
+
+	public String getUserExperience() {
+		return userExperience;
+	}
+
+	public void setUserExperience(String userExperience) {
+		this.userExperience = userExperience;
+	}
+
+	public Integer getClimblingAltitude() {
+		return climblingAltitude;
+	}
+
+	public void setClimblingAltitude(Integer climblingAltitude) {
+		this.climblingAltitude = climblingAltitude;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public Integer getViewType() {

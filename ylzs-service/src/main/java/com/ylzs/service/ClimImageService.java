@@ -19,12 +19,12 @@ public class ClimImageService {
 	
 	 /**
      * 批量更新图片
-     * @param mounClimId - 登山行程id
+     * @param dynamicId - 动态id
      * @param picIdList - 图片ids
      */
-	void batchUpdateImage(String mounClimId, List<String> picIdList){
+	void batchUpdateImage(String dynamicId, List<String> picIdList){
 		ClimImage climImage = new ClimImage();
-		climImage.setMounClimId(mounClimId);
+		climImage.setDynamicId(dynamicId);
 		
 		Timestamp nowTime = DateTimeUtil.getNowTimestamp();
 		for(int i=0;i<picIdList.size();i++){

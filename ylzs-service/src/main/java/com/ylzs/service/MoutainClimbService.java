@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ylzs.core.constant.DynamicEnum;
 import com.ylzs.core.dto.ClimbingTrackDTO;
 import com.ylzs.core.dto.CreateTravelDTO;
 import com.ylzs.core.dto.ReleaseTravelDTO;
@@ -28,6 +29,8 @@ public class MoutainClimbService {
 	private ClimImageService climImageService;
 	@Autowired
 	private UserDynamicMapper userDynamicMapper;
+	@Autowired
+	private ViewFriendService viewFriendService;
 
 	
 	 /**
@@ -48,18 +51,30 @@ public class MoutainClimbService {
 	@Transactional
 	public void realeaseTravel(UserMounClim userMounClim, ReleaseTravelDTO releaseTravelDTO) {
 		//更新行程信息
-		userMounClim.setUserExperience(releaseTravelDTO.getUserExperience());
-		userMounClim.setMountainName(releaseTravelDTO.getMountainName());
-		moutainClimMapper.updateByPrimaryKeySelective(userMounClim);
+		if(null != userMounClim){
+			userMounClim.setUserExperience(releaseTravelDTO.getUserExperience());
+			userMounClim.setMountainName(releaseTravelDTO.getMountainName());
+			moutainClimMapper.updateByPrimaryKeySelective(userMounClim);
+		}
 		//发布动态
+		String dynamicId = CommonUtil.uuid();
 		UserDynamic userDynamic = new UserDynamic();
 		BeanUtils.copyProperties(releaseTravelDTO, userDynamic);
-		userDynamic.setId(CommonUtil.uuid());
+		userDynamic.setId(dynamicId);
+		//冗余字段
+		userDynamic.setUserExperience(releaseTravelDTO.getUserExperience());
+		userDynamic.setMountainName(releaseTravelDTO.getMountainName());
+		userDynamic.setClimblingAltitude(userMounClim.getClimblingAltitude());
+		
 		userDynamic.setCreateTime(DateTimeUtil.getNowTimestamp());
-		userDynamic.setDynamicStatus(2);
+		userDynamic.setDynamicStatus(DynamicEnum.DYNAMIC_RELEASE.getCode());
 		userDynamicMapper.insertSelective(userDynamic);
+		//更新查看好友表
+		if(userDynamic.getViewType() == DynamicEnum.VIEW_SELECT_FRIEND.getCode()){
+			viewFriendService.batchInsertFriend(dynamicId,releaseTravelDTO.getFriendList(),DynamicEnum.FRIEND_VISIBLE.getCode());
+		}
 		//更新行程图片
-		climImageService.batchUpdateImage(userMounClim.getId(),releaseTravelDTO.getPicIdList());
+		climImageService.batchUpdateImage(dynamicId,releaseTravelDTO.getPicIdList());
 	}
 
 

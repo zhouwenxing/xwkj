@@ -81,7 +81,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 		token.clear();
-		return new CommonResponse<User>("succ","登录成功");
+		return new CommonResponse<User>("succ");
 	}
 	
 	
@@ -112,26 +112,23 @@ public class UserController {
 	/**
 	 * 上传头像
 	 * @param request
-	 * @param nickName
+	 * @param headId
 	 */
 	@PostMapping(value="/headPhoto/upload")
-	@ApiOperation(value="修改上传上传头像")
+	@ApiOperation(value="上传头像(可联调4.7)")
 	@ApiImplicitParams({
-		  @ApiImplicitParam(name="file",value="头像图片",required = true,dataType="file", paramType = "query")
+		  @ApiImplicitParam(name="headId",value="头像图片id",required = true,dataType="string", paramType = "query")
 		 })
-	public CommonResponse upload(@ApiIgnore @Request RequestInfo requestInfo,@ApiIgnore HttpSession session,
-			MultipartFile file){
-		if(null == file){
-			return new CommonResponse("fail","请上传图片");
+	public CommonResponse<String> upload(@ApiIgnore @Request RequestInfo requestInfo,@ApiIgnore HttpSession session,
+			String headId){
+		if(StringUtils.isBlank(headId)){
+			return new CommonResponse<String>("fail","头像id不可为空",null);
 		}
-		//...
-		String headId = "";
-		
 		String userId = (String)session.getAttribute("userId");
 		User user = new User();
 		user.setId(userId);
 		user.setHeadPortraitId(headId);
 		userService.updateByPrimaryKeySelective(user);
-		return new CommonResponse("succ","上传成功",headId);
+		return new CommonResponse<String>("succ","上传成功",headId);
 	}
 }

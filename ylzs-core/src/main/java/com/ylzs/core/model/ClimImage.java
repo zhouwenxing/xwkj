@@ -1,20 +1,19 @@
 package com.ylzs.core.model;
 
-import java.sql.Timestamp;
-import com.ylzs.core.model.base.RequestInfo;
+import com.ylzs.core.model.base.BaseModel;
 
-public class ClimImage extends RequestInfo {
+public class ClimImage extends BaseModel {
 	private static final long serialVersionUID = -2798147735235388817L;
 
     private String dynamicId;
 
     private String imageId;
+    
+    private String imagePath;
 
     private Integer imageType;
 
     private Integer imageSort;
-
-    private Timestamp updateTime;
 
 	public String getDynamicId() {
 		return dynamicId;
@@ -32,6 +31,14 @@ public class ClimImage extends RequestInfo {
 		this.imageId = imageId;
 	}
 
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
 	public Integer getImageType() {
 		return imageType;
 	}
@@ -46,13 +53,5 @@ public class ClimImage extends RequestInfo {
 
 	public void setImageSort(Integer imageSort) {
 		this.imageSort = imageSort;
-	}
-
-	public Timestamp getUpdateTime() {
-		return updateTime;
-	}
-
-	public void setUpdateTime(Timestamp updateTime) {
-		this.updateTime = updateTime;
 	}
 }

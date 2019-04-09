@@ -1,18 +1,15 @@
 package com.ylzs.service;
 
 import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.github.pagehelper.PageHelper;
 import com.ylzs.core.constant.DynamicEnum;
 import com.ylzs.core.dto.DynamicListDTO;
 import com.ylzs.core.dto.ReleaseTravelDTO;
 import com.ylzs.core.mapper.UserDynamicMapper;
 import com.ylzs.core.model.UserDynamic;
-import com.ylzs.core.vo.CommentVO;
 import com.ylzs.core.vo.DynamicVO;
 
 

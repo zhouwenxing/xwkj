@@ -15,6 +15,12 @@ public class HomeStatisVO {
 	
 	@ApiModelProperty(value="登山距离(m)")
 	private long totalDistance;
+	
+	@ApiModelProperty(value="累积登山次数")
+	private int climbCount;
+	
+	@ApiModelProperty(value="我的排名")
+	private int myRanking;
 
 	public long getTotalHeight() {
 		return totalHeight;
@@ -39,8 +45,20 @@ public class HomeStatisVO {
 	public void setTotalDistance(long totalDistance) {
 		this.totalDistance = totalDistance;
 	}
-	
-	
-	
 
+	public int getClimbCount() {
+		return climbCount;
+	}
+
+	public void setClimbCount(int climbCount) {
+		this.climbCount = climbCount;
+	}
+
+	public int getMyRanking() {
+		return myRanking;
+	}
+
+	public void setMyRanking(int myRanking) {
+		this.myRanking = myRanking;
+	}
 }

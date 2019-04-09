@@ -32,7 +32,7 @@ spring:
             prefix: /WEB-INF/templates/
             suffix: .vm
         date-format: yyyy-MM-dd HH:mm:ss
-#        static-path-pattern: /**
+        static-path-pattern: /**
     aop:
         proxy-target-class: true
     velocity:
@@ -41,8 +41,8 @@ spring:
         number-tool-attribute: number
         date-tool-attribute: date
         resource-loader-path: /WEB-INF/templates/
-#    resources:
-#        static-locations: classpath:/static/,classpath:/META-INF/resources/,classpath:/META-INF/resources/webjars/
+    resources:
+        static-locations: classpath:/static/,classpath:/META-INF/resources/,classpath:/META-INF/resources/webjars/
     
     redis:
         database: 0
@@ -88,4 +88,12 @@ shiro:
 
 swagger:
     enabled: true
+    
+upload: 
+    file: 
+        path:/xwkj/ylzs/file
+    
+
+    
+    
        

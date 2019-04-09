@@ -1,9 +1,9 @@
 package com.ylzs.core.model;
 
-import java.util.Date;
+import com.ylzs.core.model.base.BaseModel;
 
-public class Image {
-    private String id;
+public class Image extends BaseModel {
+	private static final long serialVersionUID = -6299973090126039736L;
 
     private String ext;
 
@@ -17,79 +17,51 @@ public class Image {
 
     private String filePath;
 
-    private Date createTime;
+	public String getExt() {
+		return ext;
+	}
 
-    private String remark;
+	public void setExt(String ext) {
+		this.ext = ext;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public String getFileName() {
+		return fileName;
+	}
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
-    public String getExt() {
-        return ext;
-    }
+	public Integer getFileSize() {
+		return fileSize;
+	}
 
-    public void setExt(String ext) {
-        this.ext = ext == null ? null : ext.trim();
-    }
+	public void setFileSize(Integer fileSize) {
+		this.fileSize = fileSize;
+	}
 
-    public String getFileName() {
-        return fileName;
-    }
+	public Integer getFileHeight() {
+		return fileHeight;
+	}
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName == null ? null : fileName.trim();
-    }
+	public void setFileHeight(Integer fileHeight) {
+		this.fileHeight = fileHeight;
+	}
 
-    public Integer getFileSize() {
-        return fileSize;
-    }
+	public Integer getFileWidth() {
+		return fileWidth;
+	}
 
-    public void setFileSize(Integer fileSize) {
-        this.fileSize = fileSize;
-    }
+	public void setFileWidth(Integer fileWidth) {
+		this.fileWidth = fileWidth;
+	}
 
-    public Integer getFileHeight() {
-        return fileHeight;
-    }
+	public String getFilePath() {
+		return filePath;
+	}
 
-    public void setFileHeight(Integer fileHeight) {
-        this.fileHeight = fileHeight;
-    }
-
-    public Integer getFileWidth() {
-        return fileWidth;
-    }
-
-    public void setFileWidth(Integer fileWidth) {
-        this.fileWidth = fileWidth;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath == null ? null : filePath.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
 }

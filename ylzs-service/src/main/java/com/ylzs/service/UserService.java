@@ -15,6 +15,15 @@ public class UserService {
 	public void updateByPrimaryKeySelective(User user) {
 		userMapper.updateByPrimaryKeySelective(user);
 	}
+
+	/**
+	 * 获取当前用户头像路径
+	 * @param userId
+	 * @return
+	 */
+	public String getHeadPathByUserId(String userId) {
+		return userMapper.getHeadPathByUserId(userId);
+	}
 	
 	
 

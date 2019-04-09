@@ -10,5 +10,12 @@ public class YlzsBootApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(YlzsBootApplication.class, args);
 	}
+	
+//	@Bean
+//	public EmbeddedServletContainerFactory servletContainer(){
+//		TomcatEmbeddedServletContainerFactory tc = new TomcatEmbeddedServletContainerFactory();
+//		tc.setPort(8898);
+//		return tc;
+//	}
 
 }

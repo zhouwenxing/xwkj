@@ -207,4 +207,10 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <!-- 获取当前用户头像路径 -->
+  <select id="getHeadPathByUserId" resultType="string">
+  	SELECT i.file_path FROM ylzs_user u INNER JOIN ylzs_image i ON u.head_portrait_id=i.id
+  	where u.id = #{userId}
+  </select>
 </mapper>

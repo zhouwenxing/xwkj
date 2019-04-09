@@ -13,6 +13,4 @@ public interface ClimImageMapper {
 
     int updateByPrimaryKeySelective(ClimImage record);
 
-    int updateByPrimaryKey(ClimImage record);
-
 }

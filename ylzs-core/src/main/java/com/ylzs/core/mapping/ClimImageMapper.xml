@@ -5,18 +5,14 @@
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="dynamic_id" property="dynamicId" jdbcType="VARCHAR" />
     <result column="image_id" property="imageId" jdbcType="VARCHAR" />
+    <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
     <result column="image_type" property="imageType" jdbcType="TINYINT" />
     <result column="image_sort" property="imageSort" jdbcType="INTEGER" />
-    <result column="ip" property="ip" jdbcType="VARCHAR" />
-    <result column="source" property="source" jdbcType="TINYINT" />
-    <result column="imei" property="imei" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, dynamic_id, image_id, image_type, image_sort, ip, source, imei, create_time, 
-    update_time, remark
+    id, dynamic_id, image_id,image_path, image_type, image_sort, create_time, remark
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -29,14 +25,11 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ylzs.core.model.ClimImage" >
-    insert into ylzs_clim_image (id, dynamic_id, image_id, 
-      image_type, image_sort, ip, 
-      source, imei, create_time, 
-      update_time, remark)
+    insert into ylzs_clim_image (id, dynamic_id, image_id, image_path,
+      image_type, image_sort,create_time, remark)
     values (#{id,jdbcType=VARCHAR}, #{dynamicId,jdbcType=VARCHAR}, #{imageId,jdbcType=VARCHAR}, 
-      #{imageType,jdbcType=TINYINT}, #{imageSort,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, 
-      #{source,jdbcType=TINYINT}, #{imei,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+      #{imagePath,jdbcType=VARCHAR}, #{imageType,jdbcType=TINYINT}, #{imageSort,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ylzs.core.model.ClimImage" >
     insert into ylzs_clim_image
@@ -50,26 +43,17 @@
       <if test="imageId != null" >
         image_id,
       </if>
+      <if test="imagePath != null" >
+        image_path,
+      </if>
       <if test="imageType != null" >
         image_type,
       </if>
       <if test="imageSort != null" >
         image_sort,
       </if>
-      <if test="ip != null" >
-        ip,
-      </if>
-      <if test="source != null" >
-        source,
-      </if>
-      <if test="imei != null" >
-        imei,
-      </if>
       <if test="createTime != null" >
         create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
       </if>
       <if test="remark != null" >
         remark,
@@ -85,26 +69,17 @@
       <if test="imageId != null" >
         #{imageId,jdbcType=VARCHAR},
       </if>
+      <if test="imagePath != null" >
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
       <if test="imageType != null" >
         #{imageType,jdbcType=TINYINT},
       </if>
       <if test="imageSort != null" >
         #{imageSort,jdbcType=INTEGER},
       </if>
-      <if test="ip != null" >
-        #{ip,jdbcType=VARCHAR},
-      </if>
-      <if test="source != null" >
-        #{source,jdbcType=TINYINT},
-      </if>
-      <if test="imei != null" >
-        #{imei,jdbcType=VARCHAR},
-      </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
@@ -120,45 +95,22 @@
       <if test="imageId != null" >
         image_id = #{imageId,jdbcType=VARCHAR},
       </if>
+      <if test="imagePath != null" >
+        image_path = #{imagePath,jdbcType=VARCHAR},
+      </if>
       <if test="imageType != null" >
         image_type = #{imageType,jdbcType=TINYINT},
       </if>
       <if test="imageSort != null" >
         image_sort = #{imageSort,jdbcType=INTEGER},
       </if>
-      <if test="ip != null" >
-        ip = #{ip,jdbcType=VARCHAR},
-      </if>
-      <if test="source != null" >
-        source = #{source,jdbcType=TINYINT},
-      </if>
-      <if test="imei != null" >
-        imei = #{imei,jdbcType=VARCHAR},
-      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ylzs.core.model.ClimImage" >
-    update ylzs_clim_image
-    set dynamic_id = #{dynamicId,jdbcType=VARCHAR},
-      image_id = #{imageId,jdbcType=VARCHAR},
-      image_type = #{imageType,jdbcType=TINYINT},
-      image_sort = #{imageSort,jdbcType=INTEGER},
-      ip = #{ip,jdbcType=VARCHAR},
-      source = #{source,jdbcType=TINYINT},
-      imei = #{imei,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

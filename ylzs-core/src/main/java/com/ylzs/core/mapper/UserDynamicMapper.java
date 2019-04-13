@@ -1,11 +1,8 @@
 package com.ylzs.core.mapper;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
-
 import com.ylzs.core.model.UserDynamic;
-import com.ylzs.core.vo.CommentVO;
 import com.ylzs.core.vo.DynamicVO;
 
 public interface UserDynamicMapper {
@@ -18,8 +15,6 @@ public interface UserDynamicMapper {
     UserDynamic selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(UserDynamic record);
-
-    int updateByPrimaryKey(UserDynamic record);
 
     /**
 	 * 获取关注好友动态列表

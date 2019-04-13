@@ -1,5 +1,7 @@
 package com.ylzs.service;
 
+import java.util.List;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -8,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
 import com.ylzs.core.constant.DynamicEnum;
 import com.ylzs.core.dto.ClimbingTrackDTO;
 import com.ylzs.core.dto.CreateTravelDTO;
+import com.ylzs.core.dto.MoutainClimbListDTO;
 import com.ylzs.core.dto.ReleaseTravelDTO;
 import com.ylzs.core.dto.UpdateTravelDTO;
 import com.ylzs.core.mapper.UserDynamicMapper;
@@ -18,6 +22,8 @@ import com.ylzs.core.mapper.UserMounClimMapper;
 import com.ylzs.core.model.UserDynamic;
 import com.ylzs.core.model.UserMounClim;
 import com.ylzs.core.vo.HomeStatisVO;
+import com.ylzs.core.vo.MoutainClimbVO;
+import com.ylzs.exception.BusinessException;
 import com.ylzs.util.CommonUtil;
 import com.ylzs.util.DateTimeUtil;
 
@@ -83,6 +89,7 @@ public class MoutainClimbService {
 	 * @param userId - 用户id
 	 * @param createTravelDTO - 行程相关参数
 	 */
+	@Transactional
 	public String createTravel(String userId, CreateTravelDTO createTravelDTO) {
 		UserMounClim userMounClim = new UserMounClim();
 		BeanUtils.copyProperties(createTravelDTO, userMounClim);
@@ -105,11 +112,23 @@ public class MoutainClimbService {
 	 * 更新行程
 	 * @param userMounClim - 登山行程信息
 	 * @param updateTravelDTO - 行程相关请求参数
+	 * @throws BusinessException 
 	 */
-	public void updateTravel(UserMounClim userMounClim, UpdateTravelDTO updateTravelDTO) {
+	@Transactional
+	public void updateTravel(UserMounClim userMounClim, UpdateTravelDTO updateTravelDTO) throws BusinessException {
 		JSONArray climbingTrackJsonArray = JSONArray.fromObject(userMounClim.getClimbingTrack());
 		ClimbingTrackDTO climbingTrackDTO = updateTravelDTO.getClimbingTrack();
-		climbingTrackJsonArray.add(JSONObject.fromObject(climbingTrackDTO).toString());
+		//解析前端传过来的轨迹数组
+		try{
+			JSONArray jsonArr = JSONArray.fromObject(climbingTrackDTO);
+			for(int i=0;i<jsonArr.size();i++){
+				JSONObject json = jsonArr.getJSONObject(i);
+				climbingTrackJsonArray.add(json.toString());
+			}
+		}catch(Exception e){
+			throw new BusinessException("行程轨迹格式不正确");
+		}
+		
 		userMounClim.setUpdateTime(DateTimeUtil.getNowTimestamp());
 		userMounClim.setWalkLength(userMounClim.getWalkLength() + updateTravelDTO.getWalkLength());
 		userMounClim.setClimblingAltitude(userMounClim.getClimblingAltitude() + updateTravelDTO.getClimblingAltitude());
@@ -120,6 +139,20 @@ public class MoutainClimbService {
 
 	public UserMounClim selectByPrimaryKey(String mounClimId) {
 		return moutainClimMapper.selectByPrimaryKey(mounClimId);
+	}
+	
+	
+	
+	
+	/**
+     * 获取行程历史记录
+     * @param moutainClimbListDTO
+     * @param userId - 用户id
+     * @return
+     */
+	public List<MoutainClimbVO> listHistoryByUserId(MoutainClimbListDTO moutainClimbListDTO,String userId) {
+		PageHelper.startPage(moutainClimbListDTO.getPage(), moutainClimbListDTO.getRows());
+		return moutainClimMapper.listHistoryByUserId(userId);
 	}
 
 }

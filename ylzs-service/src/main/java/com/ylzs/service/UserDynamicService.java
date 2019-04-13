@@ -89,6 +89,7 @@ public class UserDynamicService {
 		dynamicVO.setCommentList(commentList);
 		//redis中获取当前动态发布人头像
 		dynamicVO.setHeadPortraitId("");
+		//.........更新viewTime
 		return dynamicVO;
 	}
 

@@ -18,14 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import springfox.documentation.annotations.ApiIgnore;
 
+import com.github.pagehelper.PageInfo;
 import com.ylzs.core.constant.DynamicEnum;
 import com.ylzs.core.dto.CreateTravelDTO;
+import com.ylzs.core.dto.MoutainClimbListDTO;
 import com.ylzs.core.dto.ReleaseTravelDTO;
 import com.ylzs.core.dto.ReleaseTravelDTO.Travel;
 import com.ylzs.core.dto.UpdateTravelDTO;
 import com.ylzs.core.model.UserMounClim;
 import com.ylzs.core.model.base.CommonResponse;
 import com.ylzs.core.model.base.RequestInfo;
+import com.ylzs.core.vo.MoutainClimbVO;
+import com.ylzs.exception.BusinessException;
 import com.ylzs.service.MoutainClimbService;
 import com.ylzs.web.annotation.Request;
 
@@ -58,11 +62,12 @@ public class MoutainClimbController {
 	 * 更新行程
 	 * @param request
 	 * @param updateTravelDTO
+	 * @throws BusinessException 
 	 */
 	@PostMapping(value="/travel/update")
 	@ApiOperation(value="更新行程,暂定5分钟更新一次(可联调3.24)")
 	public CommonResponse<String> updateTravel(@ApiIgnore @Request RequestInfo requestInfo,@ApiIgnore HttpSession session,
-			@Validated @RequestBody UpdateTravelDTO updateTravelDTO,@ApiIgnore BindingResult result){
+			@Validated @RequestBody UpdateTravelDTO updateTravelDTO,@ApiIgnore BindingResult result) throws BusinessException{
 		if (result.hasErrors()){
 			return new CommonResponse<String>("fail", result.getFieldErrors().get(0).getDefaultMessage(),null);
 		}
@@ -110,6 +115,22 @@ public class MoutainClimbController {
 		}
 		moutainClimbService.realeaseTravel(userMounClim,releaseTravelDTO);
 		return new CommonResponse<String>("succ");
+	}
+	
+	
+	
+	/**
+	 * 查看我的行程记录
+	 * @param request
+	 * @param createTravelDTO
+	 */
+	@PostMapping(value="/travel/list")
+	@ApiOperation(value="查看历史行程(可联调4.14)")
+	public CommonResponse<PageInfo<MoutainClimbVO>> listTravel(@ApiIgnore HttpSession session,
+			@RequestBody MoutainClimbListDTO moutainClimbListDTO){
+		String userId = (String)session.getAttribute("userId");
+		List<MoutainClimbVO> climbList = moutainClimbService.listHistoryByUserId(moutainClimbListDTO, userId);
+		return new CommonResponse<PageInfo<MoutainClimbVO>>("succ",null,new PageInfo<MoutainClimbVO>(climbList));
 	}
 
 }

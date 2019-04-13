@@ -13,6 +13,7 @@
     <result column="release_longitude" property="releaseLongitude" jdbcType="DECIMAL" />
     <result column="release_latitude" property="releaseLatitude" jdbcType="DECIMAL" />
     <result column="dynamic_status" property="dynamicStatus" jdbcType="TINYINT" />
+    <result column="viem_times" property="viemTimes" jdbcType="INTEGER" />
     <result column="ip" property="ip" jdbcType="VARCHAR" />
     <result column="source" property="source" jdbcType="TINYINT" />
     <result column="imei" property="imei" jdbcType="VARCHAR" />
@@ -21,7 +22,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, moun_clim_id, mountain_name, user_experience, climbling_altitude, user_id, view_type, 
-    release_location, release_longitude, release_latitude, dynamic_status, ip, source, 
+    release_location, release_longitude, release_latitude, dynamic_status,viem_times, ip, source, 
     imei, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -38,14 +39,14 @@
     insert into ylzs_user_dynamic (id, moun_clim_id, mountain_name, 
       user_experience, climbling_altitude, user_id, 
       view_type, release_location, release_longitude, 
-      release_latitude, dynamic_status, ip, 
+      release_latitude, dynamic_status,viem_times, ip, 
       source, imei, create_time, 
       update_time)
     values (#{id,jdbcType=VARCHAR}, #{mounClimId,jdbcType=VARCHAR}, #{mountainName,jdbcType=VARCHAR}, 
       #{userExperience,jdbcType=VARCHAR}, #{climblingAltitude,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
       #{viewType,jdbcType=TINYINT}, #{releaseLocation,jdbcType=VARCHAR}, #{releaseLongitude,jdbcType=DECIMAL}, 
-      #{releaseLatitude,jdbcType=DECIMAL}, #{dynamicStatus,jdbcType=TINYINT}, #{ip,jdbcType=VARCHAR}, 
-      #{source,jdbcType=TINYINT}, #{imei,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{releaseLatitude,jdbcType=DECIMAL}, #{dynamicStatus,jdbcType=TINYINT}, #{viewTimes,jdbcType=INTEGER}, 
+      #{ip,jdbcType=VARCHAR}, #{source,jdbcType=TINYINT}, #{imei,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ylzs.core.model.UserDynamic" >
@@ -83,6 +84,9 @@
       </if>
       <if test="dynamicStatus != null" >
         dynamic_status,
+      </if>
+      <if test="viewTimes != null" >
+        view_times,
       </if>
       <if test="ip != null" >
         ip,
@@ -134,6 +138,9 @@
       <if test="dynamicStatus != null" >
         #{dynamicStatus,jdbcType=TINYINT},
       </if>
+      <if test="viewTimes != null" >
+        #{view_times,jdbcType=INTEGER},
+      </if>
       <if test="ip != null" >
         #{ip,jdbcType=VARCHAR},
       </if>
@@ -184,6 +191,9 @@
       <if test="dynamicStatus != null" >
         dynamic_status = #{dynamicStatus,jdbcType=TINYINT},
       </if>
+      <if test="viewTimes != null" >
+        view_times = #{viewTimes,jdbcType=INTEGER},
+      </if>
       <if test="ip != null" >
         ip = #{ip,jdbcType=VARCHAR},
       </if>
@@ -200,25 +210,6 @@
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ylzs.core.model.UserDynamic" >
-    update ylzs_user_dynamic
-    set moun_clim_id = #{mounClimId,jdbcType=VARCHAR},
-      mountain_name = #{mountainName,jdbcType=VARCHAR},
-      user_experience = #{userExperience,jdbcType=VARCHAR},
-      climbling_altitude = #{climblingAltitude,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=VARCHAR},
-      view_type = #{viewType,jdbcType=TINYINT},
-      release_location = #{releaseLocation,jdbcType=VARCHAR},
-      release_longitude = #{releaseLongitude,jdbcType=DECIMAL},
-      release_latitude = #{releaseLatitude,jdbcType=DECIMAL},
-      dynamic_status = #{dynamicStatus,jdbcType=TINYINT},
-      ip = #{ip,jdbcType=VARCHAR},
-      source = #{source,jdbcType=TINYINT},
-      imei = #{imei,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   

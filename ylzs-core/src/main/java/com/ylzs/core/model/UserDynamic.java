@@ -28,6 +28,8 @@ public class UserDynamic extends RequestInfo {
     private Integer dynamicStatus;
 
     private Timestamp updateTime;
+    
+    private Integer viemTimes;
 
 	public String getMounClimId() {
 		return mounClimId;
@@ -116,4 +118,13 @@ public class UserDynamic extends RequestInfo {
 	public void setUpdateTime(Timestamp updateTime) {
 		this.updateTime = updateTime;
 	}
+
+	public Integer getViemTimes() {
+		return viemTimes;
+	}
+
+	public void setViemTimes(Integer viemTimes) {
+		this.viemTimes = viemTimes;
+	}
+	
 }

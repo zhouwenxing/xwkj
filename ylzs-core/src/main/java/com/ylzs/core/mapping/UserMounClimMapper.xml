@@ -244,4 +244,31 @@
 	WHERE 
 		user_id=#{userId}
  </select>
+ 
+ <!-- 获取行程历史记录 -->
+ <select id="listHistoryByUserId" resultType="com.ylzs.core.vo.MoutainClimbVO">
+ 	SELECT 
+	 	mc.id,
+	 	mc.user_id,
+	 	mc.mountain_name,
+	 	mc.climbling_altitude,
+	 	mc.up_altitude,
+	 	mc.climbing_track,
+	 	mc.update_time,
+	 	ci.image_path 
+	FROM 
+ 		ylzs_user_moun_clim mc 
+	LEFT JOIN 
+		ylzs_user_dynamic d
+ 	ON 
+ 		mc.id = d.moun_clim_id 
+	INNER JOIN 
+		ylzs_clim_image ci
+	ON 
+		d.id = ci.dynamic_id
+	WHERE 
+		mc.user_id = #{userId}
+	AND 
+		ci.image_type=1
+ </select>
 </mapper>

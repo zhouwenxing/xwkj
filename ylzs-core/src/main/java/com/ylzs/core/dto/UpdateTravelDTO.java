@@ -21,7 +21,7 @@ public class UpdateTravelDTO {
 	@Min(value=0)
 	private Integer climblingAltitude;
 	
-	@ApiModelProperty(value="行程轨迹",required=true)
+	@ApiModelProperty(value="行程轨迹，必须为json数组,可以多个轨迹点一起传",required=true)
 	@NotNull(message="行程轨迹不可为空")
 	private ClimbingTrackDTO climbingTrack;
 

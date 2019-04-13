@@ -10,17 +10,8 @@
   <groupId>com.ylzs.service</groupId>
   <artifactId>ylzs-service</artifactId>
   <version>0.0.1.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
 
   <name>ylzs-service</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
-  </properties>
 
   <dependencies>
     <dependency>
@@ -29,18 +20,4 @@
             <version>0.0.1.1-SNAPSHOT</version>
         </dependency>
   </dependencies>
-  
-  <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>none</phase>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 </project>

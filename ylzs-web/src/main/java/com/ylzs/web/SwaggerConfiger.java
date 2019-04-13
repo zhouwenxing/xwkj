@@ -3,8 +3,6 @@ package com.ylzs.web;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -34,7 +32,8 @@ public class SwaggerConfiger{
                 .paths(PathSelectors.any()).build().pathMapping("/");
     }
  
-    private ApiInfo apiInfo() {
+    @SuppressWarnings("deprecation")
+	private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("一览众山后台APIs")
                 .description("一览众山后台APIs")

@@ -44,7 +44,7 @@ public class HomeController {
 	public CommonResponse<HomeStatisVO> staticsClimbMountain(@ApiIgnore @Request RequestInfo requestInfo,@ApiIgnore HttpSession session){
 		String userId = (String)session.getAttribute("userId");
 		HomeStatisVO homeStatisVO = moutainClimbService.staticsClimbMountain(userId);
-		return new CommonResponse<HomeStatisVO>("succ",homeStatisVO);
+		return new CommonResponse<HomeStatisVO>("succ",null,homeStatisVO);
 	}
 	
 	

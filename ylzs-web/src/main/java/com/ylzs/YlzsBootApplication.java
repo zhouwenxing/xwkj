@@ -2,9 +2,11 @@ package com.ylzs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 
 @SpringBootApplication
-//@MapperScan("com.ylzs.core")
+@PropertySources({@PropertySource("classpath:conf/business-params.properties")})
 public class YlzsBootApplication {
 
 	public static void main(String[] args) {

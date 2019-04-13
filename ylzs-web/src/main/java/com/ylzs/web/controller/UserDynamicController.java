@@ -87,7 +87,7 @@ public class UserDynamicController {
 			@RequestBody DynamicListDTO dynamicListDTO){
 		String userId = (String)session.getAttribute("userId");
 		List<DynamicVO> dynamicList = userDynamicService.listFriendDynamic(dynamicListDTO,userId);
-		return new CommonResponse<PageInfo<DynamicVO>>("succ",new PageInfo<DynamicVO>(dynamicList));
+		return new CommonResponse<PageInfo<DynamicVO>>("succ",null,new PageInfo<DynamicVO>(dynamicList));
 	}
 	
 	/**
@@ -111,6 +111,6 @@ public class UserDynamicController {
 			return new CommonResponse<DynamicVO>("fail","未获取到相关动态信息");
 		}
 		DynamicVO dynamicVO = userDynamicService.getDetailDynamic(userDynamic,userId);
-		return new CommonResponse<DynamicVO>("succ",dynamicVO);
+		return new CommonResponse<DynamicVO>("succ",null,dynamicVO);
 	}
 }

@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value="返回参数")
 public class CommonResponse<T> {
+	public static final String SUCCESS = "succ";
+	public static final String FAIL = "fail";
 	
 	@ApiModelProperty(value="succ-成功，fail失败")
 	private String code;//响应码 succ/fail
@@ -19,6 +21,11 @@ public class CommonResponse<T> {
 		this.code = code;
 	}
 	
+	public CommonResponse(String code,String msg){
+		this.code = code;
+		this.msg = msg;
+	}
+	
 	public CommonResponse(String code,String msg,T data){
 		this.code = code;
 		this.msg = msg;
@@ -26,16 +33,6 @@ public class CommonResponse<T> {
 		
 	}
 	
-	public CommonResponse(String code,T data){
-		this.code = code;
-		this.data = data;
-	}
-	
-	public CommonResponse(String code,String msg){
-		this.code = code;
-		this.msg = msg;
-	}
-
 	public String getCode() {
 		return code;
 	}

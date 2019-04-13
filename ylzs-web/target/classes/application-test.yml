@@ -88,12 +88,4 @@ shiro:
 
 swagger:
     enabled: true
-    
-upload: 
-    file: 
-        path:/xwkj/ylzs/file
-    
-
-    
-    
        

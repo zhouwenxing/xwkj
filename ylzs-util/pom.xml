@@ -9,7 +9,8 @@
   <groupId>com.ylzs.util</groupId>
   <artifactId>ylzs-util</artifactId>
   <version>0.0.1.1-SNAPSHOT</version>
-
+  <packaging>jar</packaging>
+  
   <properties>
 		<commons-io.version>2.5</commons-io.version>
 		<commons-codec.version>1.9</commons-codec.version>
@@ -19,11 +20,6 @@
 	</properties>
 	
   <dependencies>
-   		<dependency>
-		    <groupId>commons-codec</groupId>
-		    <artifactId>commons-codec</artifactId>
-		    <version>${commons-codec.version}</version>
-		</dependency>
        <dependency>
            <groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>

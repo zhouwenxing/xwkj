@@ -10,6 +10,7 @@
   <groupId>com.ylzs.service</groupId>
   <artifactId>ylzs-service</artifactId>
   <version>0.0.1.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
   <name>ylzs-service</name>
 
